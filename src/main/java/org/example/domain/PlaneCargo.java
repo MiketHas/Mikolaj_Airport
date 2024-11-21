@@ -1,4 +1,4 @@
-package org.example;
+package org.example.domain;
 
 import java.io.IOException;
 
@@ -20,4 +20,8 @@ public class PlaneCargo extends Plane {
         return super.toString().replace("]", ", Carry Capacity=" + carryCapacity + "]");
     }
 
+    @Override
+    public boolean isPassengerPlane() {
+        return false;
+    }
 }

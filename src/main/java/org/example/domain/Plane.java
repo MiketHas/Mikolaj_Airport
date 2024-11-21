@@ -1,4 +1,4 @@
-package org.example;
+package org.example.domain;
 
 import java.io.IOException;
 
@@ -37,6 +37,8 @@ public abstract class Plane {
     public int getFuelCapacity() {
         return fuelCapacity;
     }
+
+    public abstract boolean isPassengerPlane();
 
     @Override
     public String toString() {

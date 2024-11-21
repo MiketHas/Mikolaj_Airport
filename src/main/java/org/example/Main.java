@@ -1,13 +1,12 @@
 package org.example;
 
-import java.io.IOException;
-
-import static org.example.Hangar.hangar;
-
+import static service.Hangar.hangar;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        hangar();
+    public static void main(String[] args) {
+        while (true) {
+            hangar();
+        }
     }
 }
 

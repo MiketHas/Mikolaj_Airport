@@ -1,11 +1,14 @@
-package org.example;
+package service;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.example.domain.Plane;
+import org.example.domain.PlaneCargo;
+import org.example.domain.PlanePassenger;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 
 public class DataProvider {
@@ -22,11 +25,11 @@ public class DataProvider {
 
     public static Plane[] planeArrayFromExcel() throws IOException {
 
-        FileInputStream fis = new FileInputStream("C://Users//Mikolaj Hasik//Desktop//J_Basic//Mikolaj_Airport//Planes.xlsx");
-        XSSFWorkbook workbook = new XSSFWorkbook(fis); // we've got the Excel file!
+        InputStream is = DataProvider.class.getResourceAsStream("/Planes.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook(is); // we've got the Excel file!
         XSSFSheet sheet = workbook.getSheetAt(0);
 
-        int numberOfPlanes = sheet.getPhysicalNumberOfRows()-1;
+        int numberOfPlanes = sheet.getPhysicalNumberOfRows() - 1;
         Plane[] planeArray = new Plane[numberOfPlanes];
         System.out.println("Number of planes extracted from .xlsx file: " + numberOfPlanes);
 
@@ -34,7 +37,7 @@ public class DataProvider {
         rows.next(); // skipping the 1st row
 
         int rowNumber = 0;
-        while(rows.hasNext()) {
+        while (rows.hasNext()) {
             Row row = rows.next(); // jestesmy w 2 rzedzie
 
             String name = row.getCell(0).getStringCellValue();
@@ -46,18 +49,18 @@ public class DataProvider {
             int carryCapacity = (int) row.getCell(6).getNumericCellValue();
 
 
-            if (passCapacity>0) {
+            if (passCapacity > 0) {
                 PlanePassenger planePass = new PlanePassenger(name, price, flightRange, speed, fuelCapacity, passCapacity);
                 planeArray[rowNumber] = planePass;
             } else {
-                PlaneCargo planeCargo =  new PlaneCargo(name, price, flightRange, speed, fuelCapacity, carryCapacity);
+                PlaneCargo planeCargo = new PlaneCargo(name, price, flightRange, speed, fuelCapacity, carryCapacity);
                 planeArray[rowNumber] = planeCargo;
             }
 
             rowNumber++;
         }
         workbook.close();
-        fis.close();
+        is.close();
         return planeArray;
     }
 }

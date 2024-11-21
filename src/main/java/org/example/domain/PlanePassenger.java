@@ -1,4 +1,4 @@
-package org.example;
+package org.example.domain;
 
 import java.io.IOException;
 
@@ -12,11 +12,16 @@ public class PlanePassenger extends Plane {
     }
 
     public int getPassCapacity() {
-        return passCapacity;
+        return this.passCapacity;
     }
 
     @Override
     public String toString() {
         return super.toString().replace("]", ", Passenger Capacity=" + passCapacity + "]");
+    }
+
+    @Override
+    public boolean isPassengerPlane() {
+        return true;
     }
 }
