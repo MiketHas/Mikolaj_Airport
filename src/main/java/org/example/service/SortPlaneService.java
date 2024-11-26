@@ -1,7 +1,7 @@
-package org.example.util;
+package org.example.service;
 
 import org.example.domain.Plane;
-import service.Hangar;
+import org.example.util.Hangar;
 
 public class SortPlaneService {
 

@@ -10,12 +10,19 @@ public abstract class Plane {
     private int speed;
     private int fuelCapacity;
 
-    public Plane(String name, double price, int flightRange, int speed, int fuelCapacity) throws IOException {
+    public Plane(String name, double price, int flightRange, int speed, int fuelCapacity) {
         this.name = name;
         this.price = price;
         this.flightRange = flightRange;
         this.speed = speed;
         this.fuelCapacity = fuelCapacity;
+    }
+
+    public static Plane createPlane(PlaneTypes type, String name, double price, int flightRange, int speed, int fuelCapacity, int passCapacity, int cargoCapacity) throws IOException {
+        return switch (type) {
+            case PASSENGER -> new PlanePassenger(name, price, flightRange, speed, fuelCapacity, passCapacity);
+            case CARGO -> new PlaneCargo(name, price, flightRange, speed, fuelCapacity, cargoCapacity);
+        };
     }
 
     public String getName() {
@@ -43,11 +50,11 @@ public abstract class Plane {
     @Override
     public String toString() {
         return "Plane[" +
-                "name=" + name +
-                ", price=" + price +
-                ", flightRange=" + flightRange +
-                ", speed=" + speed +
-                ", fuelCapacity=" + fuelCapacity +
+                "name = " + name +
+                ", price = " + price +
+                ", flightRange = " + flightRange +
+                ", speed = " + speed +
+                ", fuelCapacity = " + fuelCapacity +
                 ']';
     }
 }

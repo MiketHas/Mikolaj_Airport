@@ -1,15 +1,16 @@
-package service;
+package org.example.service;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.example.domain.Plane;
-import org.example.domain.PlaneCargo;
-import org.example.domain.PlanePassenger;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
+
+import static org.example.domain.PlaneTypes.CARGO;
+import static org.example.domain.PlaneTypes.PASSENGER;
 
 public class DataProvider {
 
@@ -50,10 +51,12 @@ public class DataProvider {
 
 
             if (passCapacity > 0) {
-                PlanePassenger planePass = new PlanePassenger(name, price, flightRange, speed, fuelCapacity, passCapacity);
+                //PlanePassenger planePass = new PlanePassenger(name, price, flightRange, speed, fuelCapacity, passCapacity);
+                Plane planePass = Plane.createPlane(PASSENGER, name, price, flightRange, speed, fuelCapacity, passCapacity, carryCapacity);// <- !!!!!!!!
                 planeArray[rowNumber] = planePass;
             } else {
-                PlaneCargo planeCargo = new PlaneCargo(name, price, flightRange, speed, fuelCapacity, carryCapacity);
+                //PlaneCargo planeCargo = new PlaneCargo(name, price, flightRange, speed, fuelCapacity, carryCapacity);
+                Plane planeCargo = Plane.createPlane(CARGO, name, price, flightRange, speed, fuelCapacity, passCapacity, carryCapacity);// <- !!!!!!!!
                 planeArray[rowNumber] = planeCargo;
             }
 

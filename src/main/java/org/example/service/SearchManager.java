@@ -1,10 +1,10 @@
-package org.example.util;
+package org.example.service;
 
-import service.Hangar;
-import service.Reader;
+import org.example.service.Reader;
+import org.example.util.Hangar;
 
-import static service.Hangar.hangar;
-import static service.Hangar.input;
+import static org.example.util.Hangar.hangar;
+import static org.example.util.Hangar.input;
 
 public class SearchManager {
 

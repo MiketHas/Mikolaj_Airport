@@ -6,7 +6,7 @@ public class PlanePassenger extends Plane {
 
     private int passCapacity;
 
-    public PlanePassenger(String name, double price, int flightRange, int speed, int fuelCapacity, int passCapacity) throws IOException {
+    public PlanePassenger(String name, double price, int flightRange, int speed, int fuelCapacity, int passCapacity) {
         super(name, price, flightRange, speed, fuelCapacity);
         this.passCapacity = passCapacity;
     }
@@ -17,7 +17,7 @@ public class PlanePassenger extends Plane {
 
     @Override
     public String toString() {
-        return super.toString().replace("]", ", Passenger Capacity=" + passCapacity + "]");
+        return super.toString().replace("]", ", Passenger Capacity = " + passCapacity + "]");
     }
 
     @Override

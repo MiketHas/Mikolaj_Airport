@@ -1,4 +1,6 @@
-package service;
+package org.example.service;
+
+import org.example.util.Hangar;
 
 public class Reader {
 

@@ -1,14 +1,16 @@
-package org.example.util;
+package org.example.service;
 
 import org.example.domain.Plane;
-import service.Hangar;
-import service.Reader;
+import org.example.domain.PlaneTypes;
+import org.example.util.Hangar;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-import static service.Hangar.hangar;
-import static service.Hangar.planesToSell;
+import static org.example.domain.PlaneTypes.CARGO;
+import static org.example.domain.PlaneTypes.PASSENGER;
+import static org.example.util.Hangar.hangar;
+import static org.example.util.Hangar.planesToSell;
 
 public class PurchaseService {
 
@@ -21,38 +23,27 @@ public class PurchaseService {
 
         int choice = Reader.errorHandling(3, "You didn't enter a correct numerical value! Please enter a number 1-3!");
         switch (choice) {
-            case 1 -> buyPassengerPlane();
-            case 2 -> buyCargoPlane();
+            case 1 -> buyPlane(PASSENGER);
+            case 2 -> buyPlane(CARGO);
             case 3 -> hangar();
         }
     }
 
-    public static void buyPassengerPlane() {
+    public static void buyPlane(PlaneTypes type) {
         for (int i = 0; i < Hangar.planesToSell.length; i++) {
-            /*if (Hangar.planesToSell[i] instanceof PlanePassenger) {*/
-            if (Hangar.planesToSell[i] != null && Hangar.planesToSell[i].isPassengerPlane()) {
+            if (Hangar.planesToSell[i] != null && checkPlaneType(Hangar.planesToSell[i], type)) {
                 addPlaneToHangar(Hangar.planesToSell[i]);
                 Hangar.planesToSell[i] = null;
                 //removeNullPlaneFromSell();
-                System.out.println("Passenger plane added to your hangar!");
+                System.out.println(type == PASSENGER ? "Passenger plane added to your hangar!" : "Cargo plane added to your hangar!");
                 return;
             }
         }
-        System.out.println("Sorry, you already bought all passenger planes!");
+        System.out.println(type == PASSENGER ? "Sorry, you already bought all passenger planes!" : "Sorry, you already bought all cargo planes!");
     }
 
-    public static void buyCargoPlane() {
-        for (int i = 0; i < Hangar.planesToSell.length; i++) {
-            /*if (Hangar.planesToSell[i] instanceof PlaneCargo) {*/
-            if (Hangar.planesToSell[i] != null && !Hangar.planesToSell[i].isPassengerPlane()) {
-                addPlaneToHangar(Hangar.planesToSell[i]);
-                Hangar.planesToSell[i] = null;
-                //removeNullPlaneFromSell();
-                System.out.println("Cargo plane added to your hangar!");
-                return;
-            }
-        }
-        System.out.println("Sorry, you already bought all cargo planes!");
+    public static boolean checkPlaneType(Plane plane, PlaneTypes type) {
+        return ((plane.isPassengerPlane() && type == PASSENGER) || ((!plane.isPassengerPlane()) && type == CARGO));
     }
 
     public static void addPlaneToHangar(Plane plane) {

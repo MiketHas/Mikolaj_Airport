@@ -1,9 +1,9 @@
-package org.example.util;
+package org.example.service;
 
 import org.example.domain.Plane;
 import org.example.domain.PlaneCargo;
 import org.example.domain.PlanePassenger;
-import service.Hangar;
+import org.example.util.Hangar;
 
 public class TotalOperationsServices {
 
@@ -11,7 +11,9 @@ public class TotalOperationsServices {
         if (Hangar.hangarPlanes.length > 0) {
             //Arrays.stream(Hangar.hangarPlanes).forEach(System.out::println);
             for (Plane plane : Hangar.hangarPlanes) {
-                System.out.println(plane);
+                if (plane != null) {
+                    System.out.println(plane);
+                }
             }
         } else {
             System.out.println("You don't have any planes!");

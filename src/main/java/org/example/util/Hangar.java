@@ -1,11 +1,13 @@
-package service;
+package org.example.util;
 
 import org.example.domain.Plane;
-import org.example.util.PurchaseService;
-import org.example.util.SearchManager;
-import org.example.util.SellService;
-import org.example.util.SortPlaneService;
-import org.example.util.TotalOperationsServices;
+import org.example.service.DataProvider;
+import org.example.service.Reader;
+import org.example.service.PurchaseService;
+import org.example.service.SearchManager;
+import org.example.service.SellService;
+import org.example.service.SortPlaneService;
+import org.example.service.TotalOperationsServices;
 
 import java.util.Scanner;
 
