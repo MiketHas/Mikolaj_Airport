@@ -5,6 +5,9 @@ import org.example.domain.PlaneCargo;
 import org.example.domain.PlanePassenger;
 import org.example.util.Hangar;
 
+import static org.example.domain.PlaneTypes.CARGO;
+import static org.example.domain.PlaneTypes.PASSENGER;
+
 public class TotalOperationsServices {
 
     public static void listPlanes() { // old method
@@ -36,23 +39,31 @@ public class TotalOperationsServices {
     public static void totalPassCapacity() {
         //int totalCapacity = Arrays.stream(Hangar.hangarPlanes).filter(plane -> plane instanceof PlanePassenger).mapToInt(plane -> ((PlanePassenger) plane).getPassCapacity()).sum();
         int totalCapacity = 0;
-        for (Plane hangarPlane : Hangar.hangarPlanes) {
-            if (hangarPlane.isPassengerPlane()) {
-                totalCapacity += ((PlanePassenger) hangarPlane).getPassCapacity();
+        if (SellService.containsPlaneType(PASSENGER)) {
+            for (Plane hangarPlane : Hangar.hangarPlanes) {
+                if (hangarPlane.isPassengerPlane()) {
+                    totalCapacity += ((PlanePassenger) hangarPlane).getPassCapacity();
+                }
             }
+            System.out.println("Total passenger capacity of planes in your hangar is " + totalCapacity);
+        } else {
+            System.out.println("You don't have any passenger planes in your hangar so your passenger capacity is " + totalCapacity + ".");
         }
-        System.out.println("Total passenger capacity of planes in your hangar is " + totalCapacity);
     }
 
     public static void totalCargoCapacity() {
         //int totalCapacity = Arrays.stream(Hangar.hangarPlanes).filter(plane -> plane instanceof PlaneCargo).mapToInt(plane -> ((PlaneCargo) plane).getCarryCapacity()).sum();
         int totalCapacity = 0;
-        for (Plane hangarPlane : Hangar.hangarPlanes) {
-            if (!hangarPlane.isPassengerPlane()) {
-                totalCapacity += ((PlaneCargo) hangarPlane).getCarryCapacity();
+        if (SellService.containsPlaneType(CARGO)) {
+            for (Plane hangarPlane : Hangar.hangarPlanes) {
+                if (!hangarPlane.isPassengerPlane()) {
+                    totalCapacity += ((PlaneCargo) hangarPlane).getCarryCapacity();
+                }
             }
+            System.out.println("Total cargo capacity of planes in your hangar is " + totalCapacity);
+        } else {
+            System.out.println("You don't have any cargo planes in your hangar so your cargo capacity is " + totalCapacity + ".");
         }
-        System.out.println("Total cargo capacity of planes in your hangar is " + totalCapacity);
     }
 
     public static int countNonNullPlanes() {
